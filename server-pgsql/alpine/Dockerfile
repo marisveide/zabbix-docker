@@ -40,6 +40,7 @@ RUN addgroup zabbix && \
             net-snmp-agent-libs \
             libldap \
             libcurl \
+            curl \
             openipmi-libs \
             libssh2 && \
     rm -rf /var/cache/apk/*
@@ -112,6 +113,14 @@ VOLUME ["/var/lib/zabbix/ssl/certs", "/var/lib/zabbix/ssl/keys", "/var/lib/zabbi
 
 ADD conf/etc/supervisor/ /etc/supervisor/
 ADD run_zabbix_component.sh /
+
+RUN mkdir -p /usr/share/zabbix/alertscripts && \
+    chown --quiet -R zabbix:root /usr/share/zabbix/alertscripts
+ADD zabbix-slack-alertscript/slack.sh /usr/share/zabbix/alertscripts/
+
+RUN echo "alias l='ls -al'" >> ~/.bash_profile
+RUN ln -s ~/.bash_profile ~/.bashrc
+
 
 ENTRYPOINT ["/bin/bash"]
 
