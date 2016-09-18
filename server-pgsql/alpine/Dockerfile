@@ -117,6 +117,7 @@ ADD run_zabbix_component.sh /
 RUN mkdir -p /usr/share/zabbix/alertscripts && \
     chown --quiet -R zabbix:root /usr/share/zabbix/alertscripts
 ADD zabbix-slack-alertscript/slack.sh /usr/share/zabbix/alertscripts/
+RUN chmod 755 /usr/share/zabbix/alertscripts/slack.sh
 
 RUN echo "alias l='ls -al'" >> ~/.bash_profile
 RUN ln -s ~/.bash_profile ~/.bashrc
