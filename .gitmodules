@@ -1,3 +1,0 @@
-[submodule "server-pgsql/alpine/zabbix-slack-alertscript"]
-	path = server-pgsql/alpine/zabbix-slack-alertscript
-	url = https://github.com/ericoc/zabbix-slack-alertscript.git
